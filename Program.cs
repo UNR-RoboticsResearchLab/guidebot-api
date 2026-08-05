@@ -1,7 +1,14 @@
+using guidebot_api.Services;
+using guidebot_api.Services.OpenRouteService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<OpenRouteServiceOptions>(
+    builder.Configuration.GetSection(OpenRouteServiceOptions.SectionName));
+builder.Services.AddHttpClient<IDirectionsService, DirectionsService>();
 
 var app = builder.Build();
 
